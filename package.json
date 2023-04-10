@@ -4,8 +4,10 @@
   "description": "express back-end architecture for birthday reminder project",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --runInBand",
-    "start": "tsc && nodemon dist/server.js"
+    "start": "tsc && node dist/app.js",
+    "start:dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "test": "jest --coverage runInBand"
   },
   "author": "kn1ght",
   "license": "ISC",
@@ -26,6 +28,7 @@
     "jest": "^29.5.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }
 }
