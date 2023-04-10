@@ -1,7 +1,12 @@
+DROP DATABASE birthday_reminders_db;
+CREATE DATABASE birthday_reminders_db;
+
+\c birthday_reminders_db
+
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY NOT NULL,
-  "first_name" string NOT NULL,
-  "last_name" string NOT NULL,
+  "first_name" TEXT NOT NULL,
+  "last_name" TEXT NOT NULL,
   "dob" date NOT NULL
 );
 
