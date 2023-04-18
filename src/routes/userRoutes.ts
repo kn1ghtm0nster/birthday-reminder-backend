@@ -3,6 +3,13 @@ import User from "../models/User";
 
 const router = express.Router();
 
+/**
+ * GET => /users
+ *
+ * returns an array of user objects from backend server
+ *
+ * AUTHORIZATION: NONE
+ */
 router.get("/", async (req: Request, res: Response) => {
   try {
     const users = await User.getAllUsers();
@@ -13,6 +20,13 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * POST => /users
+ *
+ * returns a new user object that was added to backend server
+ *
+ * AUTHORIZATION: NONE
+ */
 router.post("/", async (req: Request, res: Response) => {
   const { firstName, lastName, dob } = req.body;
 
@@ -25,4 +39,41 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-export {router as userRoutes};
+/**
+ * PUT => /users/:id
+ * 
+ * accepts a request body that contains the following:
+ * { id, firstName, lastName, dob }
+ * 
+ * NOTE: request body does NOT have to contain all the fields above.
+ * 
+ * returns an updated user object from the backend db.
+ * 
+ * If user not found by id provided, 404 error is returned via JSON response
+ * 
+ * AUTHORIZATION: NONE (for the time being)
+ */
+// router.put("/:id", async (req: Request, res: Response) => {
+//   try {
+//   } catch (err) {
+//     console.error(err);
+//     res
+//       .status(404)
+//       .send(`User not found. Please check your spelling and try again.`);
+//   }
+// });
+
+/**
+ * DELETE => /users/:id
+ * 
+ * returns a simple "delete" message with the id of the user that was deleted from the backend
+ * 
+ * If user not found by id provided, 404 error is returned via JSON response
+ * 
+ * AUTHORIZATION: NONE (for the time being)
+ */
+// router.delete('/:id', async (req: Request, res: Response) => {
+
+// })
+
+export { router as userRoutes };
