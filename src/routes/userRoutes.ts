@@ -40,7 +40,7 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 /**
- * PUT => /users/:id
+ * PATCH => /users/:id
  * 
  * accepts a request body that contains the following:
  * { id, firstName, lastName, dob }
@@ -53,15 +53,20 @@ router.post("/", async (req: Request, res: Response) => {
  * 
  * AUTHORIZATION: NONE (for the time being)
  */
-// router.put("/:id", async (req: Request, res: Response) => {
-//   try {
-//   } catch (err) {
-//     console.error(err);
-//     res
-//       .status(404)
-//       .send(`User not found. Please check your spelling and try again.`);
-//   }
-// });
+router.patch("/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const userUpdate = req.body;
+
+    const updated = await User.updateUser(+id, userUpdate);
+    return res.status(200).json({update: updated});
+  } catch (err) {
+    console.error(err);
+    res
+      .status(404)
+      .send(`User not found. Please check your spelling and try again.`);
+  }
+});
 
 /**
  * DELETE => /users/:id
@@ -72,8 +77,15 @@ router.post("/", async (req: Request, res: Response) => {
  * 
  * AUTHORIZATION: NONE (for the time being)
  */
-// router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
 
-// })
+    const deleted = await User.deleteUser(+id);
+    return res.status(200).json(deleted);
+  } catch (err) {
+    return res.status(404).json(err);
+  }
+})
 
 export { router as userRoutes };
